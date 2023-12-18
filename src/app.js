@@ -4,7 +4,7 @@ const https = require("https");
 const querystring = require("querystring"); // Подключаем модуль для кодирования данных в формат x-www-form-urlencoded
 
 const app = express();
-const port = 3000;
+const port = 443;
 
 const clientId = "2b60b384-1c7d-4429-9d7c-cb4c109eedc9";
 const clientSecret = "7cf25c26-9975-4335-904a-440cb97be3d3";
