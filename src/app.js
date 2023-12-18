@@ -64,7 +64,10 @@ app.use((req, res, next) => {
     httpsAgent: httpsAgent,
   })
     .then((apiResponse) => {
-      res.status(apiResponse.status).json(apiResponse.data);
+      res
+        .status(apiResponse.status)
+        .header("Access-Control-Allow-Origin", "http://localhost:4200")
+        .json(apiResponse.data);
     })
     .catch((error) => {
       console.error("Proxy error:", error.message);
