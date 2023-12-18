@@ -66,7 +66,7 @@ app.use((req, res, next) => {
     .then((apiResponse) => {
       res
         .status(apiResponse.status)
-        .header("Access-Control-Allow-Origin", "http://localhost:4200")
+        .header("Access-Control-Allow-Origin: *")
         .json(apiResponse.data);
     })
     .catch((error) => {
