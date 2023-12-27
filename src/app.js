@@ -85,7 +85,7 @@ app.use((req, res, next) => {
     })
     .catch((error) => {
       console.error("Proxy error:", error.message);
-      res.status(500).send(error);
+      res.status(500).send(error.message);
     });
 });
 
