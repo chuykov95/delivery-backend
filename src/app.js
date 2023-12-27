@@ -84,7 +84,7 @@ app.use((req, res, next) => {
         .json(apiResponse.data);
     })
     .catch((error) => {
-      console.error("Proxy error:", error.response);
+      console.error("Proxy error:", error.response.data);
       res.status(500).send(error.message);
     });
 });
