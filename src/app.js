@@ -66,6 +66,7 @@ app.use((req, res, next) => {
     Authorization: `Bearer ${accessToken}`,
     "Content-Type": "application/json",
   };
+  console.log("Proxy Request:", req.method, req.url, req.body);
 
   axios({
     method: req.method,
@@ -75,6 +76,8 @@ app.use((req, res, next) => {
     httpsAgent: httpsAgent,
   })
     .then((apiResponse) => {
+      console.log("Proxy Response:", apiResponse.status, apiResponse.data);
+
       res
         .status(apiResponse.status)
         .set("Access-Control-Allow-Origin", "*")
