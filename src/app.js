@@ -58,7 +58,7 @@ app.use((req, res, next) => {
 
   axios({
     method: req.method,
-    url: `https://delivery.ucs.ru/${req.url}`,
+    url: `https://delivery.ucs.ru${req.url}`,
     data: req.body,
     headers: proxyHeaders,
     httpsAgent: httpsAgent,
