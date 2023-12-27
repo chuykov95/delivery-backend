@@ -66,7 +66,6 @@ app.use((req, res, next) => {
     Authorization: `Bearer ${accessToken}`,
     "Content-Type": "application/json",
   };
-  console.log("Proxy Request:", req.method, req.url, req.body);
 
   axios({
     method: req.method,
@@ -76,8 +75,6 @@ app.use((req, res, next) => {
     httpsAgent: httpsAgent,
   })
     .then((apiResponse) => {
-      console.log("Proxy Response:", apiResponse.status, apiResponse.data);
-
       res
         .status(apiResponse.status)
         .set("Access-Control-Allow-Origin", "*")
@@ -85,7 +82,7 @@ app.use((req, res, next) => {
     })
     .catch((error) => {
       console.error("Proxy error:", error.response.data);
-      res.status(500).send(error.message);
+      res.status(500).send(error.response.data);
     });
 });
 
