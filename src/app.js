@@ -72,7 +72,7 @@ app.use((req, res, next) => {
     "Content-Type": "application/json",
   };
 
-  console.error("Req:", req);
+  console.error("Req:", req.body);
 
   axios({
     method: req.method,
