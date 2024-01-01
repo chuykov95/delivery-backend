@@ -72,6 +72,8 @@ app.use((req, res, next) => {
     "Content-Type": "application/json",
   };
 
+  console.error("Req:", req);
+
   axios({
     method: req.method,
     url: `https://delivery.ucs.ru${req.url}`,
@@ -86,6 +88,7 @@ app.use((req, res, next) => {
         .json(apiResponse.data);
     })
     .catch((error) => {
+      console.error("Proxy error:", error);
       console.error("Proxy error:", error.response.data);
       res.status(500).send(error.response.data);
     });
