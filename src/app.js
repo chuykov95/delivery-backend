@@ -6,6 +6,8 @@ const querystring = require("querystring"); // Подключаем модуль
 const app = express();
 const port = 443;
 
+app.use(express.json());
+
 const clientId = "2b60b384-1c7d-4429-9d7c-cb4c109eedc9";
 const clientSecret = "7cf25c26-9975-4335-904a-440cb97be3d3";
 const scopes = "orders";
