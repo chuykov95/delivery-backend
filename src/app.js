@@ -69,8 +69,8 @@ app.get("/orders/reference", (req, res) => {
 
 app.post("/orders/reference", (req, res) => {
   const newItem = req.body;
-  referenceData.push(newItem);
-  res = newItem;
+  referenceData = newItem;
+  res.json(referenceData);
 });
 
 app.use((req, res, next) => {
