@@ -1,7 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 const https = require("https");
-const querystring = require("querystring"); // Подключаем модуль для кодирования данных в формат x-www-form-urlencoded
+const querystring = require("querystring");
 
 const app = express();
 const port = 4200;
@@ -63,11 +63,11 @@ app.options("*", (req, res) => {
   res.status(200).send();
 });
 
-app.get("/api/reference", (req, res) => {
+app.get("/orders/reference", (req, res) => {
   res.json(referenceData);
 });
 
-app.post("/api/reference", (req, res) => {
+app.post("/orders/reference", (req, res) => {
   const newItem = req.body;
   referenceData.push(newItem);
   res = newItem;
