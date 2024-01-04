@@ -43,6 +43,8 @@ async function getAccessToken() {
   }
 }
 
+let referenceData = [];
+
 const httpsAgent = new https.Agent({ rejectUnauthorized: false });
 
 // Добавляем middleware для обработки CORS
@@ -61,6 +63,16 @@ app.options("*", (req, res) => {
   res.status(200).send();
 });
 
+app.get("/api/reference", (req, res) => {
+  res.json(referenceData);
+});
+
+app.post("/api/reference", (req, res) => {
+  const newItem = req.body;
+  referenceData.push(newItem);
+  res = newItem;
+});
+
 app.use((req, res, next) => {
   const proxyHeaders = {
     Accept: `application/json, text/plain, */*`,
@@ -73,8 +85,6 @@ app.use((req, res, next) => {
     Authorization: `Bearer ${accessToken}`,
     "Content-Type": "application/json",
   };
-
-  console.error("Req:", req.body);
 
   axios({
     method: req.method,
@@ -90,7 +100,6 @@ app.use((req, res, next) => {
         .json(apiResponse.data);
     })
     .catch((error) => {
-      console.error("Proxy error:", error);
       console.error("Proxy error:", error.response.data);
       res.status(500).send(error.response.data);
     });
