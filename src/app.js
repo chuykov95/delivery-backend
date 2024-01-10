@@ -68,6 +68,10 @@ app.get("/orders/reference", (req, res) => {
   res.json(referenceData);
 });
 
+app.post("/orders/getreference", (req, res) => {
+  res.json(referenceData);
+});
+
 app.post("/orders/reference", (req, res) => {
   const newItem = req.body;
   referenceData = newItem;
