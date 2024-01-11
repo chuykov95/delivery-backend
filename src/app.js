@@ -64,11 +64,6 @@ app.options("*", (req, res) => {
 });
 
 app.get("/orders/reference", (req, res) => {
-  console.log("/orders/reference");
-  res.json(referenceData);
-});
-
-app.post("/orders/getreference", (req, res) => {
   res.json(referenceData);
 });
 
