@@ -33,54 +33,97 @@ export default class TutorialController {
   }
 
   async findAll(req: Request, res: Response) {
-    try {
-      res.status(200).json({
-        message: "findAll OK",
+    const title = req.query.title;
+    var condition = title
+      ? { title: { $regex: new RegExp(title as string), $options: "i" } }
+      : {};
+
+    Tutorial.find(condition)
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving tutorials.",
+        });
       });
-    } catch (err) {
-      res.status(500).json({
-        message: "Internal Server Error!",
-      });
-    }
   }
 
   async findOne(req: Request, res: Response) {
-    try {
-      res.status(200).json({
-        message: "findOne OK",
-        reqParamId: req.params.id,
+    const id = req.params.id;
+
+    Tutorial.findById(id)
+      .then((data) => {
+        if (!data)
+          res.status(404).send({ message: "Not found Tutorial with id " + id });
+        else res.send(data);
+      })
+      .catch((err) => {
+        res
+          .status(500)
+          .send({ message: "Error retrieving Tutorial with id=" + id });
       });
-    } catch (err) {
-      res.status(500).json({
-        message: "Internal Server Error!",
-      });
-    }
   }
 
   async update(req: Request, res: Response) {
-    try {
-      res.status(200).json({
-        message: "update OK",
-        reqParamId: req.params.id,
-        reqBody: req.body,
-      });
-    } catch (err) {
-      res.status(500).json({
-        message: "Internal Server Error!",
+    if (!req.body) {
+      return res.status(400).send({
+        message: "Data to update can not be empty!",
       });
     }
+
+    const id = req.params.id;
+
+    Tutorial.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+      .then((data) => {
+        if (!data) {
+          res.status(404).send({
+            message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found!`,
+          });
+        } else res.send({ message: "Tutorial was updated successfully." });
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: "Error updating Tutorial with id=" + id,
+        });
+      });
   }
 
   async delete(req: Request, res: Response) {
-    try {
-      res.status(200).json({
-        message: "delete OK",
-        reqParamId: req.params.id,
+    const id = req.params.id;
+
+    Tutorial.findByIdAndRemove(id, { useFindAndModify: false })
+      .then((data) => {
+        if (!data) {
+          res.status(404).send({
+            message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found!`,
+          });
+        } else {
+          res.send({
+            message: "Tutorial was deleted successfully!",
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: "Could not delete Tutorial with id=" + id,
+        });
       });
-    } catch (err) {
-      res.status(500).json({
-        message: "Internal Server Error!",
+  }
+
+  async deleteAll(req: Request, res: Response) {
+    Tutorial.deleteMany({})
+      .then((data) => {
+        res.send({
+          message: `${data.deletedCount} Tutorials were deleted successfully!`,
+        });
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while removing all tutorials.",
+        });
       });
-    }
   }
 }

@@ -11,10 +11,7 @@ class Server {
     constructor(app) {
         this.config(app);
         models_1.default.mongoose
-            .connect(models_1.default.url, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        })
+            .connect(models_1.default.url)
             .then(() => {
             console.log("Connected to the database!");
         })

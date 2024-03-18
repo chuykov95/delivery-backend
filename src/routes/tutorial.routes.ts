@@ -24,6 +24,7 @@ class TutorialRoutes {
 
     // Delete a Tutorial with id
     this.router.delete("/:id", this.controller.delete);
+    this.router.delete("/", this.controller.deleteAll);
   }
 }
 
