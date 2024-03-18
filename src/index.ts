@@ -1,14 +1,15 @@
 import express, { Application } from "express";
 import cors, { CorsOptions } from "cors";
 import Routes from "./routes";
-import db from "./models";
+import mongoose from "mongoose";
+import { dbConfig } from "./config/db.config";
 
 export default class Server {
   constructor(app: Application) {
     this.config(app);
 
-    db.mongoose
-      .connect(db.url)
+    mongoose
+      .connect(dbConfig)
       .then(() => {
         console.log("Connected to the database!");
       })

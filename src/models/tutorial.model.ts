@@ -1,19 +1,15 @@
-export const tutorials = (mongoose: any): any => {
-  const schema = mongoose.Schema(
-    {
-      title: String,
-      description: String,
-      published: Boolean,
-    },
-    { timestamps: true }
-  );
+import mongoose, { Schema, Document } from "mongoose";
 
-  schema.method("toJSON", function () {
-    const { __v, _id, ...object } = this.toObject();
-    object.id = _id;
-    return object;
-  });
+export interface ITutorial extends Document {
+  title: string;
+  description: string;
+  published: boolean;
+}
 
-  const Tutorial = mongoose.model("tutorial", schema);
-  return Tutorial;
-};
+const TutorialSchema: Schema = new Schema({
+  title: { type: String, required: true, unique: true },
+  description: { type: String, required: true },
+  published: { type: String, required: true },
+});
+
+export default mongoose.model<ITutorial>("Tutorial", TutorialSchema);

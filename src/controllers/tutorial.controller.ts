@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import db from "../models";
 
-const Tutorial = db.tutorials;
+import Tutorial, { ITutorial } from "../models/tutorial.model";
+import { CreateQuery } from "mongoose";
 
 export default class TutorialController {
   async create(req: Request, res: Response) {
@@ -12,22 +12,18 @@ export default class TutorialController {
     }
 
     // Create a Tutorial
-    const tutorial = new Tutorial({
+    const tutorial = Tutorial.create({
       title: req.body.title,
       description: req.body.description,
       published: req.body.published ? req.body.published : false,
-    });
-
-    // Save Tutorial in the database
-    tutorial
-      .save(tutorial)
-      .then((data) => {
+    })
+      .then((data: ITutorial) => {
         res.send(data);
       })
-      .catch((err) => {
+      .catch((error: Error) => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while creating the Tutorial.",
+            error.message || "Some error occurred while creating the Tutorial.",
         });
       });
   }
