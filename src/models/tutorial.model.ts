@@ -12,4 +12,10 @@ const TutorialSchema: Schema = new Schema({
   published: { type: String, required: true },
 });
 
+TutorialSchema.method("toJSON", function () {
+  const { __v, _id, ...object } = this.toObject();
+  object.id = _id;
+  return object;
+});
+
 export default mongoose.model<ITutorial>("Tutorial", TutorialSchema);
