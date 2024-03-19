@@ -1,22 +1,14 @@
 import express, { Application } from "express";
 import cors, { CorsOptions } from "cors";
 import Routes from "./routes";
-import mongoose from "mongoose";
-import { dbConfig } from "./config/db.config";
+import { db } from "./config/db.config";
+import connect from "./connect-db";
 
 export default class Server {
   constructor(app: Application) {
     this.config(app);
 
-    mongoose
-      .connect(dbConfig)
-      .then(() => {
-        console.log("Connected to the database!");
-      })
-      .catch((err) => {
-        console.log("Cannot connect to the database!", err);
-        process.exit();
-      });
+    connect({ db });
 
     new Routes(app);
   }

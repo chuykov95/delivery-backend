@@ -1,1 +1,1 @@
-export const dbConfig = "mongodb://localhost:27017/bezkoder_db";
+export const db = "mongodb://localhost:27017/bezkoder_db";
