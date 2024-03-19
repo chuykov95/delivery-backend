@@ -1,15 +1,19 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 export interface ICategory extends Document {
-  id: string;
   name: string;
-  parentId: string;
+  parentId: string | null;
 }
 
 const CategorySchema: Schema = new Schema({
-  id: { type: mongoose.Types.ObjectId, default: mongoose.Types.ObjectId },
   name: { type: String, required: true },
-  parentId: { type: String, required: false },
+  parentId: { type: String, required: false, default: null },
+});
+
+CategorySchema.method("toJSON", function () {
+  const { __v, _id, ...object } = this.toObject();
+  object.id = _id;
+  return object;
 });
 
 export default mongoose.model<ICategory>("Category", CategorySchema);

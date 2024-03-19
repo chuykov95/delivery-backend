@@ -7,6 +7,6 @@ export default class Routes {
   constructor(app: Application) {
     app.use("/api", homeRoutes);
     app.use("/api/tutorials", tutorialRoutes);
-    app.use("/api/category", categoryRoutes);
+    app.use("/api/categories", categoryRoutes);
   }
 }
