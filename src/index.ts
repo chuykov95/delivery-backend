@@ -3,6 +3,7 @@ import cors, { CorsOptions } from "cors";
 import Routes from "./routes";
 import { db } from "./config/db.config";
 import connect from "./connect-db";
+import path from "path";
 
 export default class Server {
   constructor(app: Application) {
@@ -21,5 +22,6 @@ export default class Server {
     app.use(cors(corsOptions));
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
+    app.use("/uploads", express.static(path.join(__dirname, "uploads")));
   }
 }
