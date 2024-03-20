@@ -8,12 +8,16 @@ export default class AuthController {
   async login(req: Request, res: Response) {
     const { username, password } = req.body;
     try {
+      if (!username || !password) {
+        res.status(400).send({ message: `Поля не могут быть пустыми` });
+        return;
+      }
       const user: IUser = await User.findOne({
         username,
       });
 
       if (!user) {
-        res.status(403).send("Пользователь не найден");
+        res.status(403).send({ message: `Пользователь не найден` });
         return;
       }
 
