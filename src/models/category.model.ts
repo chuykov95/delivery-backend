@@ -5,7 +5,7 @@ export interface ICategory extends Document {
   parentId: string | null;
 }
 
-const CategorySchema: Schema = new Schema({
+const CategorySchema: Schema<ICategory> = new Schema<ICategory>({
   name: { type: String, required: true },
   parentId: { type: String, required: false, default: null },
 });

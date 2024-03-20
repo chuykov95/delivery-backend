@@ -22,7 +22,7 @@ export interface IProduct extends Document {
   globalTradeItemNumbers: string[] | null;
 }
 
-const ProductSchema: Schema = new Schema({
+const ProductSchema: Schema<IProduct> = new Schema<IProduct>({
   externalId: { type: String, required: true },
   categoryId: { type: String, required: true },
   name: { type: String, required: true },
