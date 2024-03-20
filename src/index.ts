@@ -5,12 +5,14 @@ import { db } from "./config/db.config";
 import connect from "./connect-db";
 import path from "path";
 import cookieParser from "cookie-parser";
+import { createAdmin } from "./create-admin";
 
 export default class Server {
   constructor(app: Application) {
     this.config(app);
 
     connect({ db });
+    createAdmin();
 
     new Routes(app);
   }
