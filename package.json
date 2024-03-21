@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "dev": "node ./build/server.js",
-    "start": "tsc && npm run dev"
+    "start": "tsc && npm run dev",
+    "deploy": "tsc && pm2 start ./build/server.js"
   },
   "author": "",
   "license": "ISC",
