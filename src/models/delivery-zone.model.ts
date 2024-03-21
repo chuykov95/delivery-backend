@@ -20,7 +20,7 @@ export interface IDeliveryZone extends Document {
 
 const GeometrySchema = new Schema({
   type: { type: String, required: true },
-  coordinates: [[Number]],
+  coordinates: [[[Number]]],
 });
 
 const OptionsSchema = new Schema({
