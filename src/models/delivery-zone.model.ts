@@ -4,7 +4,7 @@ export interface IDeliveryZone extends Document {
   feature: {
     geometry: {
       type: string;
-      coordinates: string[][];
+      coordinates: number[][];
     };
   };
   options: {
@@ -20,7 +20,7 @@ export interface IDeliveryZone extends Document {
 
 const GeometrySchema = new Schema({
   type: { type: String, required: true },
-  coordinates: [[String]],
+  coordinates: [[Number]],
 });
 
 const OptionsSchema = new Schema({
