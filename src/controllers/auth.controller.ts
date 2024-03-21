@@ -30,8 +30,11 @@ export default class AuthController {
 
       const token = jwt.sign({ username }, "secret");
 
-      res.cookie("token", token, { httpOnly: true, secure: true });
-      res.send(token);
+      res.cookie("token", token, {
+        maxAge: 900000,
+        httpOnly: true,
+      });
+      res.send({ token });
     } catch (error) {
       res.status(403).send({
         message: error.message || "Пользователь не авторизован",
