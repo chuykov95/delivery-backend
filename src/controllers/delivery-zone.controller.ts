@@ -25,17 +25,17 @@ export default class DeliveryZoneController {
     }
   }
 
-  // async findAll(req: Request, res: Response) {
-  //   try {
-  //     const restaurants: IRestaurant[] = await Restaurant.find();
-  //     res.send(restaurants);
-  //   } catch (error) {
-  //     res.status(500).send({
-  //       message:
-  //         error.message || "Some error occurred while retrieving Restaurant.",
-  //     });
-  //   }
-  // }
+  async findAll(req: Request, res: Response) {
+    try {
+      const zones: IDeliveryZone[] = await DeliveryZone.find();
+      res.send(zones);
+    } catch (error) {
+      res.status(500).send({
+        message:
+          error.message || "Some error occurred while retrieving DeliveryZone.",
+      });
+    }
+  }
 
   // async findOne(req: Request, res: Response) {
   //   const id = req.params.id;

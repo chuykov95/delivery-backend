@@ -11,7 +11,7 @@ class DeliveryZoneRoutes {
 
   intializeRoutes() {
     this.router.post("/", this.controller.create);
-    // this.router.get("/", this.controller.findAll);
+    this.router.get("/", this.controller.findAll);
     // this.router.get("/:id", this.controller.findOne);
     // this.router.put("/:id", this.controller.update);
     // this.router.delete("/:id", this.controller.delete);
