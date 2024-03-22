@@ -53,32 +53,31 @@ export default class DeliveryZoneController {
   //   }
   // }
 
-  // async update(req: Request, res: Response) {
-  //   const id = req.params.id;
+  async update(req: Request, res: Response) {
+    const zonesData: IDeliveryZone[] = req.body;
+    try {
+      if (zonesData.length === 0) {
+        res.status(400).send({ message: "Content can not be empty!" });
+        return;
+      }
 
-  //   try {
-  //     if (req.body.name === undefined || req.body.name === "") {
-  //       res.status(400).send({
-  //         message: "Data to update can not be empty!",
-  //       });
-  //       return;
-  //     }
-
-  //     const restaurant = await Restaurant.findByIdAndUpdate(id, req.body, {
-  //       useFindAndModify: false,
-  //     });
-
-  //     if (!restaurant) {
-  //       res.status(404).send({
-  //         message: `Cannot update Restaurant with id=${id}. Maybe Restaurant was not found!`,
-  //       });
-  //     } else res.send({ message: "Restaurant was updated successfully." });
-  //   } catch (error) {
-  //     res.status(500).send({
-  //       message: error.message || "Error updating Restaurant with id=" + id,
-  //     });
-  //   }
-  // }
+      const editedZones: IDeliveryZone[] = [];
+      for (const zoneData of zonesData) {
+        const zone: IDeliveryZone = await DeliveryZone.findByIdAndUpdate(
+          zoneData.id,
+          zoneData,
+          {
+            useFindAndModify: false,
+          }
+        );
+        editedZones.push(zone);
+      }
+    } catch (error) {
+      res.status(500).send({
+        message: error.message || "Error updating DeliveryZone",
+      });
+    }
+  }
 
   // async delete(req: Request, res: Response) {
   //   const id = req.params.id;
