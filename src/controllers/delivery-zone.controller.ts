@@ -104,17 +104,17 @@ export default class DeliveryZoneController {
   //   }
   // }
 
-  // async deleteAll(req: Request, res: Response) {
-  //   try {
-  //     const restaurants = await Restaurant.deleteMany({});
-  //     res.send({
-  //       message: `${restaurants.deletedCount} Restaurant were deleted successfully!`,
-  //     });
-  //   } catch (error) {
-  //     res.status(500).send({
-  //       message:
-  //         error.message || "Some error occurred while removing all tutorials.",
-  //     });
-  //   }
-  // }
+  async deleteAll(req: Request, res: Response) {
+    try {
+      const zones = await DeliveryZone.deleteMany({});
+      res.send({
+        message: `${zones.deletedCount} DeliveryZone were deleted successfully!`,
+      });
+    } catch (error) {
+      res.status(500).send({
+        message:
+          error.message || "Some error occurred while removing all tutorials.",
+      });
+    }
+  }
 }
