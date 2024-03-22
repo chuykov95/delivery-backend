@@ -71,6 +71,7 @@ export default class DeliveryZoneController {
           }
         );
         editedZones.push(zone);
+        res.send(editedZones);
       }
     } catch (error) {
       res.status(500).send({
