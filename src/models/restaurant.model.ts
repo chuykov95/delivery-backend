@@ -8,18 +8,18 @@ export interface IRestaurant extends Document {
   actualAddressLat: number | null;
   actualAddressLon: number | null;
   city: string;
-  schedule: string | null;
+  schedule: string;
 }
 
 const RestaurantSchema: Schema<IRestaurant> = new Schema<IRestaurant>({
   objectId: { type: String, required: false, default: null },
   name: { type: String, required: true },
   actualAddress: { type: String, required: true },
-  state: { type: String, enum: ["active", "inactive"], required: true },
+  state: { type: String, enum: ["active", "noActive"], required: true },
   actualAddressLat: { type: Number, required: false, default: null },
   actualAddressLon: { type: Number, required: false, default: null },
   city: { type: String, required: true },
-  schedule: { type: String, required: false, default: null },
+  schedule: { type: String, required: false, default: "" },
 });
 
 RestaurantSchema.method("toJSON", function () {
