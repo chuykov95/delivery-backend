@@ -27,6 +27,9 @@ export default class Server {
     app.use(express.json());
     app.use(cookieParser());
     app.use(express.urlencoded({ extended: true }));
-    app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+    const uploadsPath = path.resolve(__dirname, "..", "..", "uploads");
+
+    app.use("/uploads", express.static(uploadsPath));
   }
 }
