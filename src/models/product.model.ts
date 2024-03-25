@@ -10,7 +10,7 @@ export interface IProduct extends Document {
   disabled: boolean | null;
   description: string;
   imageUrls: string[];
-  measure: string | null;
+  measure: { unit: string; value: number } | null;
   isContainInStopList: boolean | null;
   isListStoped: boolean | null;
   calories: number | null;
@@ -22,17 +22,22 @@ export interface IProduct extends Document {
   globalTradeItemNumbers: string[] | null;
 }
 
+const MeasureSchema = new Schema({
+  unit: { type: String, required: false, default: null },
+  value: { type: Number, required: false, default: null },
+});
+
 const ProductSchema: Schema<IProduct> = new Schema<IProduct>({
-  externalId: { type: String, required: true },
+  externalId: { type: String, required: false, default: null },
   categoryId: { type: String, required: true },
   name: { type: String, required: true },
   restaurantExtendDatas: { type: String, required: false, default: null },
-  price: { type: Number, required: false, default: null },
+  price: { type: Number, required: true },
   schemeId: { type: String, required: false, default: null },
   disabled: { type: Boolean, required: false, default: null },
   description: { type: String, required: false, default: "" },
   imageUrls: { type: [String], required: false, default: [] },
-  measure: { type: String, required: false, default: null },
+  measure: { type: MeasureSchema, required: false },
   isContainInStopList: { type: Boolean, required: false, default: null },
   isListStoped: { type: Boolean, required: false, default: null },
   calories: { type: Number, required: false, default: null },
