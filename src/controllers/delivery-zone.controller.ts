@@ -80,29 +80,29 @@ export default class DeliveryZoneController {
     }
   }
 
-  // async delete(req: Request, res: Response) {
-  //   const id = req.params.id;
+  async delete(req: Request, res: Response) {
+    const id = req.params.id;
 
-  //   try {
-  //     const restaurant = await Restaurant.findByIdAndDelete(id, {
-  //       useFindAndModify: false,
-  //     });
+    try {
+      const zone = await DeliveryZone.findByIdAndDelete(id, {
+        useFindAndModify: false,
+      });
 
-  //     if (!restaurant) {
-  //       res.status(404).send({
-  //         message: `Cannot delete Restaurant with id=${id}. Maybe Restaurant was not found!`,
-  //       });
-  //     } else {
-  //       res.send({
-  //         message: "Restaurant was deleted successfully!",
-  //       });
-  //     }
-  //   } catch (error) {
-  //     res.status(500).send({
-  //       message: error.message || "Could not delete Restaurant with id=" + id,
-  //     });
-  //   }
-  // }
+      if (!zone) {
+        res.status(404).send({
+          message: `Cannot delete DeliveryZone with id=${id}. Maybe DeliveryZone was not found!`,
+        });
+      } else {
+        res.send({
+          message: "DeliveryZone was deleted successfully!",
+        });
+      }
+    } catch (error) {
+      res.status(500).send({
+        message: error.message || "Could not delete DeliveryZone with id=" + id,
+      });
+    }
+  }
 
   async deleteAll(req: Request, res: Response) {
     try {
