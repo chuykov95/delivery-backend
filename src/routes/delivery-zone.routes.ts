@@ -14,7 +14,7 @@ class DeliveryZoneRoutes {
     this.router.get("/", this.controller.findAll);
     // this.router.get("/:id", this.controller.findOne);
     this.router.put("/", this.controller.update);
-    // this.router.delete("/:id", this.controller.delete);
+    this.router.delete("/:id", this.controller.delete);
     this.router.delete("/", this.controller.deleteAll);
   }
 }
