@@ -8,8 +8,8 @@ import { error } from "console";
 export default class OrdersController {
   async findDeliveryZone(req: Request, res: Response) {
     try {
-      const lat = Number(req.body.lat);
-      const lon = Number(req.body.lon);
+      const lat = req.body.lat;
+      const lon = req.body.lon;
 
       if (isNaN(lat) || isNaN(lon)) {
         res.status(400).send({ message: "Invalid coordinates!" });
