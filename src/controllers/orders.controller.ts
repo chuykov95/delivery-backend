@@ -11,7 +11,7 @@ export default class OrdersController {
       const lon = req.body.lon;
 
       if (isNaN(lat) || isNaN(lon)) {
-        res.status(400).send({ message: "Invalid coordinates!" });
+        res.status(400).send({ message: `Invalid coordinates ${lat} ${lon}!` });
         return;
       }
 
