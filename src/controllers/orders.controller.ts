@@ -7,8 +7,8 @@ import { booleanPointInPolygon, point, polygon } from "@turf/turf";
 export default class OrdersController {
   async findDeliveryZone(req: Request, res: Response) {
     try {
-      const lat = req.body.lat;
-      const lon = req.body.lon;
+      const lat = parseFloat(req.query.lat as string);
+      const lon = parseFloat(req.query.lon as string);
 
       if (isNaN(lat) || isNaN(lon)) {
         res.status(400).send({ message: `Invalid coordinates ${lat} ${lon}!` });
