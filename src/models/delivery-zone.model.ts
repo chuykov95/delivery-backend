@@ -14,8 +14,14 @@ export interface IDeliveryZone extends Document {
     strokeColor: string;
     strokeWidth: number;
   };
-  name: string;
+  polygonName: string;
   deliveryCost: number;
+  amountDelivery: number;
+  deliveryTime: number;
+  isActive: boolean;
+  restaurantId: string;
+  minOrderAmountDelivery: number;
+  minOrderAmountFreeDelivery: number;
 }
 
 const GeometrySchema = new Schema({
@@ -36,8 +42,14 @@ const DeliveryZoneSchema = new Schema<IDeliveryZone>({
     geometry: { type: GeometrySchema, required: true },
   },
   options: { type: OptionsSchema, required: true },
-  name: { type: String, required: true },
+  polygonName: { type: String, required: true },
   deliveryCost: { type: Number, required: true },
+  amountDelivery: { type: Number, required: true },
+  deliveryTime: { type: Number, required: true },
+  isActive: { type: Boolean, required: true },
+  restaurantId: { type: String, required: true },
+  minOrderAmountDelivery: { type: Number, required: true },
+  minOrderAmountFreeDelivery: { type: Number, required: true },
 });
 
 DeliveryZoneSchema.method("toJSON", function () {
