@@ -15,7 +15,6 @@ export interface IDeliveryZone extends Document {
     strokeWidth: number;
   };
   polygonName: string;
-  deliveryCost: number;
   amountDelivery: number;
   deliveryTime: number;
   isActive: boolean;
@@ -43,7 +42,6 @@ const DeliveryZoneSchema = new Schema<IDeliveryZone>({
   },
   options: { type: OptionsSchema, required: true },
   polygonName: { type: String, required: true },
-  deliveryCost: { type: Number, required: true },
   amountDelivery: { type: Number, required: true },
   deliveryTime: { type: Number, required: true },
   isActive: { type: Boolean, required: true },
