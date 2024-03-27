@@ -3,7 +3,6 @@ import DeliveryZone, { IDeliveryZone } from "../models/delivery-zone.model";
 import Restaurant, { IRestaurant } from "../models/restaurant.model";
 
 import { booleanPointInPolygon, point, polygon } from "@turf/turf";
-import { error } from "console";
 
 export default class OrdersController {
   async findDeliveryZone(req: Request, res: Response) {
