@@ -2,12 +2,17 @@ import mongoose, { Schema, Document } from "mongoose";
 
 export interface ICategory extends Document {
   name: string;
-  parentId: string | null;
+  parentId: Schema.Types.ObjectId | null;
 }
 
 const CategorySchema: Schema<ICategory> = new Schema<ICategory>({
   name: { type: String, required: true },
-  parentId: { type: String, required: false, default: null },
+  parentId: {
+    type: Schema.Types.ObjectId,
+    ref: "Category",
+    required: false,
+    default: null,
+  },
 });
 
 CategorySchema.method("toJSON", function () {

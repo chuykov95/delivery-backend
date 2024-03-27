@@ -2,7 +2,7 @@ import mongoose, { Schema, Document } from "mongoose";
 
 export interface IProduct extends Document {
   externalId: string;
-  categoryId: string;
+  categoryId: Schema.Types.ObjectId;
   name: string;
   restaurantExtendDatas: string | null;
   price: number;
@@ -29,7 +29,7 @@ const MeasureSchema = new Schema({
 
 const ProductSchema: Schema<IProduct> = new Schema<IProduct>({
   externalId: { type: String, required: false, default: null },
-  categoryId: { type: String, required: true },
+  categoryId: { type: Schema.Types.ObjectId, ref: "Category", required: true },
   name: { type: String, required: true },
   restaurantExtendDatas: { type: String, required: false, default: null },
   price: { type: Number, required: true },
