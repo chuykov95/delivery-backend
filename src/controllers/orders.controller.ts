@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import DeliveryZone, { IDeliveryZone } from "../models/delivery-zone.model";
 import Restaurant, { IRestaurant } from "../models/restaurant.model";
+import Category, { ICategory } from "../models/category.model";
+import Product, { IProduct } from "../models/product.model";
 
 import { booleanPointInPolygon, point, polygon } from "@turf/turf";
 
@@ -68,6 +70,32 @@ export default class OrdersController {
       res.status(500).send({
         message:
           error.message || "Some error occurred while finding delivery zone.",
+      });
+    }
+  }
+
+  async getMenuView(req: Request, res: Response) {
+    try {
+      const categories: ICategory[] = await Category.find();
+      const products: IProduct[] = await Product.find();
+
+      const result = {
+        categories,
+        products,
+        dateModified: null,
+        haveChanges: null,
+        ingredients: [],
+        ingredientsGroups: [],
+        ingredientsSchemes: [],
+        isPossibleDelete: false,
+        name: "Menu",
+        notPublished: false,
+      };
+
+      res.send({ result });
+    } catch (error) {
+      res.status(500).send({
+        message: error.message || "Some error occurred while finding menu .",
       });
     }
   }

@@ -18,7 +18,7 @@ export interface IDeliveryZone extends Document {
   amountDelivery: number;
   deliveryTime: number;
   isActive: boolean;
-  restaurantId: string;
+  restaurantId: Schema.Types.ObjectId;
   minOrderAmountDelivery: number;
   minOrderAmountFreeDelivery: number;
 }
@@ -45,7 +45,11 @@ const DeliveryZoneSchema = new Schema<IDeliveryZone>({
   amountDelivery: { type: Number, required: true },
   deliveryTime: { type: Number, required: true },
   isActive: { type: Boolean, required: true },
-  restaurantId: { type: String, required: true },
+  restaurantId: {
+    type: Schema.Types.ObjectId,
+    ref: "Restaurant",
+    required: true,
+  },
   minOrderAmountDelivery: { type: Number, required: true },
   minOrderAmountFreeDelivery: { type: Number, required: true },
 });
