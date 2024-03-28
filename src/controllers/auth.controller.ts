@@ -3,6 +3,7 @@ import User, { IUser } from "../models/user.model";
 
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { secret } from "../config/db.config";
 
 export default class AuthController {
   async login(req: Request, res: Response) {
@@ -28,7 +29,7 @@ export default class AuthController {
         return;
       }
 
-      const token = jwt.sign({ username }, "secret");
+      const token = jwt.sign({ username }, secret);
 
       res.send({ token });
     } catch (error) {
