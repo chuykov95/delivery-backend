@@ -33,6 +33,7 @@ export default class AuthController {
       res.cookie("token", token, {
         maxAge: 900000,
         httpOnly: true,
+        domain: ".app.localhost",
       });
       res.send({ token });
     } catch (error) {
