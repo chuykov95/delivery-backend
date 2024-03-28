@@ -7,13 +7,15 @@ import authRoutes from "./auth.routes";
 import deliveryZoneRoutes from "./delivery-zone.routes";
 import ordersRoutes from "./orders.routes";
 
+import { authMiddleWare } from "../middleware/auth.middleware";
+
 export default class Routes {
   constructor(app: Application) {
-    app.use("/api/category", categoryRoutes);
-    app.use("/api/product", productRoutes);
-    app.use("/api/restaurant", restaurantRoutes);
-    app.use("/api/zones", deliveryZoneRoutes);
-    app.use("/api/upload", uploadRoutes);
+    app.use("/api/category", authMiddleWare, categoryRoutes);
+    app.use("/api/product", authMiddleWare, productRoutes);
+    app.use("/api/restaurant", authMiddleWare, restaurantRoutes);
+    app.use("/api/zones", authMiddleWare, deliveryZoneRoutes);
+    app.use("/api/upload", authMiddleWare, uploadRoutes);
 
     app.use("/auth", authRoutes);
 

@@ -100,6 +100,19 @@ export default class OrdersController {
     }
   }
 
+  async getRestaurants(req: Request, res: Response) {
+    try {
+      const result: IRestaurant[] = await Restaurant.find();
+
+      res.send({ result });
+    } catch (error) {
+      res.status(500).send({
+        message:
+          error.message || "Some error occurred while finding restaurants.",
+      });
+    }
+  }
+
   // async create(req: Request, res: Response) {
   //   try {
   //     if (req.body.name === undefined || req.body.name === "") {
