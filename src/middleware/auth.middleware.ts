@@ -10,7 +10,9 @@ export const authMiddleWare = (req: Request, res: Response, next) => {
     }
     const decodedData = jwt.verify(token, secret, (err, decoded) => {
       if (err) {
-        return res.status(401).send({ message: "Пользователь не авторизован" });
+        return res
+          .status(401)
+          .send({ message: `Пользователь не авторизован ${token} ${decoded}` });
       }
     });
 
