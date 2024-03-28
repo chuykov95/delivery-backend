@@ -19,7 +19,7 @@ export default class Server {
 
   private config(app: Application): void {
     const corsOptions: CorsOptions = {
-      origin: "http://localhost:4200",
+      origin: "http://localhost:4000",
       credentials: true,
     };
 
