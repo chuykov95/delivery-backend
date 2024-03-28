@@ -30,11 +30,6 @@ export default class AuthController {
 
       const token = jwt.sign({ username }, "secret");
 
-      res.cookie("token", token, {
-        maxAge: 900000,
-        httpOnly: true,
-        domain: ".app.localhost",
-      });
       res.send({ token });
     } catch (error) {
       res.status(403).send({
